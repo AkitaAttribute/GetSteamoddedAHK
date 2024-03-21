@@ -6,8 +6,8 @@ Creates Exception in Windows Defender to allow Steamodded to be downloaded.
 Powershell to download latest Steamodded version from https://github.com/Steamopollys/Steamodded
 
 # HOW TO USE
-- Download the EXE.
-- RUN the EXE.
+- Download download_steamodded.exe.
+- RUN download_steamodded.exe.
 - Go to your File Explorer.
 - In the top bar, type in %appdata%\Balatro\
 - Find steamodded_injector.exe
