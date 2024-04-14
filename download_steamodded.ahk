@@ -35,12 +35,22 @@ Run, powershell.exe -Command %psCommand%, , Hide
 
 Sleep, 3000
 
-; Command to download the file
-command := "curl -L " . url . " -o """ . filePath . """"
+; PowerShell command to download the file using Invoke-WebRequest
+psDownloadCommand := "Invoke-WebRequest -Uri '" . url . "' -OutFile '" . filePath . "'"
 
-; Run the command
-Run, %comspec% /c %command%, , Hide
+; Run the PowerShell download command and check for success
+RunWait, powershell.exe -Command %psDownloadCommand%, , Hide, OutputVar
 
-MsgBox, The injector has been downloaded to %filePath%
+; Check if the file exists to verify it was downloaded
+FileGetSize, fileSize, %filePath%
+
+if (ErrorLevel == 0 && fileSize > 0) ; Check if file exists and is greater than 0 bytes
+{
+    MsgBox, The injector has been downloaded to %filePath%
+}
+else
+{
+    MsgBox, Failed to download the injector. Please report this issue to the github repo.
+}
 
 ExitApp
