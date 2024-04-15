@@ -35,8 +35,8 @@ Run, powershell.exe -Command %psCommand%, , Hide
 
 Sleep, 3000
 
-; PowerShell command to download the file using Invoke-WebRequest
-psDownloadCommand := "Invoke-WebRequest -Uri '" . url . "' -OutFile '" . filePath . "'"
+; PowerShell command to download the file using System.Net.WebClient
+psDownloadCommand := "$client = New-Object System.Net.WebClient; $client.DownloadFile('" . url . "', '" . filePath . "')"
 
 ; Run the PowerShell download command and check for success
 RunWait, powershell.exe -Command %psDownloadCommand%, , Hide, OutputVar
@@ -50,7 +50,7 @@ if (ErrorLevel == 0 && fileSize > 0) ; Check if file exists and is greater than 
 }
 else
 {
-    MsgBox, Failed to download the injector. Please report this issue to the github repo.
+    MsgBox, Failed to download the injector. Please check your internet connection and try again.
 }
 
 ExitApp
